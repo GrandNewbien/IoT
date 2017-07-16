@@ -7,11 +7,11 @@
 CRGB leds[NUM_LEDS];
 RTC_DS3231 rtc;
 void setup() {
-  // put your setup code here, to run once:
-  delay(3000);
+  delay(3000); // allow time for rtc to boot
 //Serial.begin(9600);
+//rtc.adjust(DateTime(F(__DATE__), F(__TIME__)));  //Use this to set the time
 FastLED.addLeds<NEOPIXEL, DATA_PIN>(leds, NUM_LEDS);
-  //set_max_power_in_volts_and_milliamps(5, 500); // uncomment during testing mode
+  set_max_power_in_volts_and_milliamps(5, 500); // Use this for testing with a limited power supply (ie, USB)
  if (! rtc.begin()) {
     Serial.println("Couldn't find RTC");
     
@@ -47,10 +47,14 @@ DateTime now = rtc.now();
    timehour=now.hour();
    timemin=now.minute();
    timesec=now.second();
-    
-//Serial.println(now.second(), DEC);
-//Serial.println(now.month(),DEC);
-
+/*
+Serial.print("hour: ");
+Serial.println(now.hour(), DEC);
+Serial.print("Min: ");
+Serial.println(now.minute(), DEC);
+Serial.print("Second: ");
+Serial.println(now.second(), DEC);
+*/
 FastLED.clear();
 displayWords();
 FastLED.show();
@@ -401,7 +405,7 @@ void anniversary(){
   fill_solid(leds+55,11,CHSV(anniversaryColor,saturation,brightness));
   anniversaryColor += 50;
   }
-//date: July 13, 2017
+//date: July 16, 2017
 
 /*  EXAMPLE LED CODE
  *  leds[32] = CHSV( color, saturation, brightness); 
