@@ -1,5 +1,1 @@
-To do:
-
-(1) Organize
-
-(2) Constructors
+[Link on my personal site](https://okbrb.com/projects/#word-clock)
